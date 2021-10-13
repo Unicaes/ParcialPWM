@@ -5,8 +5,11 @@
  */
 package Servlets;
 
+import Model.Clientes;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,18 +33,27 @@ public class ClientesServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         response.setContentType("text/html;charset=UTF-8");
         String[] para = request.getParameter("btnAction").split("-");
         int action = Integer.parseInt(para[0]);        
         int id = Integer.parseInt(para[1]);
-
         switch (action) {
             case 1:
-                System.out.println("Agregar");
+                Clientes item = new Clientes();
+                item.nombres=request.getParameter("txtNombres");
+                item.apellidos=request.getParameter("txtApellidos");
+                item.telefono=request.getParameter("txtTelefono");
+                item.clave=request.getParameter("txtClave");
+                item.direccion=request.getParameter("txtDireccion");
+                item.correo=request.getParameter("txtMail");
+                item.sexo=request.getParameter("txtSexo");
+                Clientes.AddCliente(item);
+                response.sendRedirect("Views/Clientes/CRUDClientes.jsp");
                 break;
             case 2:
-                System.out.println("Eliminar");
+                Clientes.RemoveCliente(id);
+                response.sendRedirect("Views/Clientes/CRUDClientes.jsp");
                 break;
             case 3:
                 System.out.println("Editar");
@@ -61,7 +73,17 @@ public class ClientesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -75,7 +97,17 @@ public class ClientesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
