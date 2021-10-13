@@ -1,0 +1,18 @@
+SMAP
+CRUDClientes_jsp.java
+JSP
+*S JSP
+*F
++ 0 CRUDClientes.jsp
+Views/Clientes/CRUDClientes.jsp
+*L
+5,6:46
+10:51,2
+11,31:53
+42:84,3
+43,31:87
+74:118,3
+75,13:121
+88,27:135
+114,9:162
+*E
