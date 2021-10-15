@@ -5,11 +5,28 @@
  */
 package Model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author bryan
  */
 public class Categoria {
-    int idcategoria;
-    String nombre_categoria;
+    public int idcategoria;
+    public String nombre_categoria;
+    static Conexion oCon;
+    public static ArrayList<Categoria> GetAll() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        oCon = new Conexion();
+        ResultSet rs = oCon.consultar("*", "categorias");
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        while(rs.next()){
+            Categoria item = new Categoria();
+            item.idcategoria=rs.getInt(1);
+            item.nombre_categoria=rs.getString(2);
+            categorias.add(item);
+        }
+        return categorias;
+    }
 }

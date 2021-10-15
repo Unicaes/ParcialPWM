@@ -5,14 +5,30 @@
  */
 package Model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author bryan
  */
 public class Proveedores {
-    int idproveedor;
-    String nombre_proveedor,telefono,contacto;
-    public static Proveedores GetAll(){
-        
+    public int idproveedor;
+    public String nombre_proveedor,telefono,contacto;
+    static Conexion oConn;
+    public static ArrayList<Proveedores> GetAll() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        oConn = new Conexion();
+        ResultSet rs = oConn.consultar("*", "proveedores");
+        ArrayList<Proveedores> proveedores = new ArrayList<>();
+        while(rs.next()){
+            Proveedores item = new Proveedores();
+            item.idproveedor=rs.getInt(1);
+            item.nombre_proveedor=rs.getString(2);
+            item.telefono=rs.getString(3);
+            item.contacto=rs.getString(4);
+            proveedores.add(item);
+        }
+        return proveedores;
     }
 }

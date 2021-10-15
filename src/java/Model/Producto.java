@@ -62,4 +62,8 @@ public class Producto {
                 + "values('"+item.idcategoria+"','"+item.idproveedor+"','"+item.nombre_producto+"','"+item.precio_normal+"','"+item.ofertado+"','"+item.precio_oferta+"','"+item.existencias+"','"+item.descripcion+"','"+item.imagen+"')");
         return resp;
     }
+    public static int remove(int id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        oCon = new Conexion();
+        return oCon.eliminar("productos", "idproducto="+id);
+    }
 }

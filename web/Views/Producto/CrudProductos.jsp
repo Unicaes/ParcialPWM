@@ -4,7 +4,16 @@
     Author     : bryan
 --%>
 
+<%@page import="Model.Producto"%>
+<%@page import="Model.Categoria"%>
+<%@page import="Model.Proveedores"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    ArrayList<Proveedores> proveedores = Proveedores.GetAll();
+    ArrayList<Categoria> categorias = Categoria.GetAll();
+    ArrayList<Producto> productos = Producto.GetAll();
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,8 +47,27 @@
             </div>
         </nav>
         <div class="container">
-            <h1>Clientes</h1>
+            <h1>Productos</h1>
             <form action="${pageContext.request.contextPath}/CRUDProductos" enctype="multipart/form-data" method="POST">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Categoria</label>
+                    <select class="form-select" name="txtCategoria">
+                        <%
+                            for (int i = 0; i < categorias.size(); i++) {
+                                out.println("<option value=\"" + categorias.get(i).idcategoria + "\">" + categorias.get(i).nombre_categoria + "</option>");
+                            }
+                        %>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Proveedor</label>
+                    <select class="form-select" name="txtProveedor">
+                        <%
+                            for (int i = 0; i < proveedores.size(); i++) {
+                                out.println("<option value=\"" + proveedores.get(i).idproveedor + "\">" + proveedores.get(i).nombre_proveedor + "</option>");
+                            }
+                        %>
+                    </select></div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre del producto</label>
                     <input type="text" name="txtNombreProd" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -74,16 +102,31 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Direccion</th>
-                            <th>Telefono</th>
-                            <th>Sexo</th>
-                            <th>Correo</th>
+                            <th>Nombre Producto</th>
+                            <th>Precio Normal</th>
+                            <th>Ofertado</th>
+                            <th>Existencias</th>
+                            <th>Descripcion</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        <%
+                            for (int i = 0; i < productos.size(); i++) {
+                                out.println("<tr>");
+                                out.println("<td>" + productos.get(i).nombre_producto + "</td>");
+                                out.println("<td>" + productos.get(i).precio_normal + "</td>");
+                                out.println("<td>" + productos.get(i).ofertado + "</td>");
+                                out.println("<td>" + productos.get(i).precio_oferta + "</td>");
+                                out.println("<td>" + productos.get(i).descripcion + "</td>");
+                                out.println("<td>");
+                                out.println("<button type=\"submit\" name=\"btnAction\" value=\"2-" + productos.get(i).idproducto + "\" class=\"btn btn-danger\">Eliminar</button>");
+                                out.println("<button type=\"submit\" name=\"btnAction\" value=\"3-" + productos.get(i).idproducto + "\" class=\"btn btn-info\">Editar</button>");
+                                out.println("</td>");
+                                out.println("</tr>");
+                            }
+                        %>
                     </tbody>
                 </table>
             </form>
