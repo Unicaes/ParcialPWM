@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,22 +18,29 @@ public class clsCarrito {
     public static clsCarrito GetInstance(){
         if (current==null) {
             current=new clsCarrito();
+            current.carrito = new HashMap<Integer,Producto>();
         }
         return current;
     }
-    public Map<String,Integer> carrito;
+    public Map<Integer,Producto> carrito;
     public static void AddElement(Producto item){
-        if (clsCarrito.GetInstance().carrito.containsKey(item.nombre_producto)) {
-            clsCarrito.GetInstance().carrito.put(item.nombre_producto, clsCarrito.GetInstance().carrito.get(item.nombre_producto)+1);
+        clsCarrito.GetInstance();
+        if (clsCarrito.GetInstance().carrito.containsKey(item.idproducto)) {
+            item = clsCarrito.GetInstance().carrito.get(item.idproducto);
+            item.existencias++;
+            clsCarrito.GetInstance().carrito.put(item.idproducto, item);
             return;
         }
-        clsCarrito.GetInstance().carrito.put(item.nombre_producto, item.existencias);
+        clsCarrito.GetInstance().carrito.put(item.idproducto, item);
     }
     public static void RemoveElement(Producto item){
-        if (clsCarrito.GetInstance().carrito.containsKey(item.nombre_producto)) {
-            clsCarrito.GetInstance().carrito.put(item.nombre_producto, clsCarrito.GetInstance().carrito.get(item.nombre_producto)-1);
-            if (clsCarrito.GetInstance().carrito.get(item.nombre_producto)<=0) {
-                clsCarrito.GetInstance().carrito.remove(item.nombre_producto);
+        clsCarrito.GetInstance();
+        if (clsCarrito.GetInstance().carrito.containsKey(item.idproducto)) {
+            item = clsCarrito.GetInstance().carrito.get(item.idproducto);
+            item.existencias--;
+            clsCarrito.GetInstance().carrito.put(item.idproducto, item);
+            if (clsCarrito.GetInstance().carrito.get(item.idproducto).existencias<=0) {
+                clsCarrito.GetInstance().carrito.remove(item.idproducto);
             }
         }
     }
