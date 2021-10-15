@@ -61,7 +61,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Sexo</label>
-                    <input type="email" name="txtSexo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" name="txtSexo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Clave</label>

@@ -70,7 +70,29 @@ public class CRUDProductos extends HttpServlet {
                 response.sendRedirect("/Parcial/Views/Producto/CrudProductos.jsp");
                 break;
             case 3:
-
+                response.sendRedirect("/Parcial/Views/Producto/ModifyProduct.jsp?id="+id);
+                break;
+            case 5:
+                Part fileImage2 = request.getPart("file");
+                String name2 = fileImage2.getName();
+                InputStream fileContent2 = fileImage2.getInputStream();
+                byte[] imageBytes2 = new byte[(int) fileImage2.getSize()];
+                fileContent2.read(imageBytes2, 0, imageBytes2.length);
+                fileContent2.close();
+                String imageStr2 = Base64.encodeBase64String(imageBytes2);
+                Producto item2 = new Producto();
+                item2.idproducto=id;
+                item2.imagen = imageStr2;
+                item2.idcategoria = Integer.parseInt(request.getParameter("txtCategoria"));
+                item2.idproveedor = Integer.parseInt(request.getParameter("txtProveedor"));
+                item2.descripcion = request.getParameter("txtDescripcion");
+                item2.nombre_producto = request.getParameter("txtNombreProd");
+                item2.precio_normal = Double.parseDouble(request.getParameter("txtPrecioN"));
+                item2.ofertado = Integer.parseInt(request.getParameter("txtOfertado"));
+                item2.precio_oferta = Double.parseDouble(request.getParameter("txtPrecioO"));
+                item2.existencias = Integer.parseInt(request.getParameter("txtExistencias"));
+                Producto.update(item2);
+                response.sendRedirect("/Parcial/Views/Producto/CrudProductos.jsp");
                 break;
             default:
                 throw new AssertionError();

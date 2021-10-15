@@ -1,0 +1,21 @@
+SMAP
+ModifyProduct_jsp.java
+JSP
+*S JSP
+*F
++ 0 ModifyProduct.jsp
+Views/Producto/ModifyProduct.jsp
+*L
+5,13:48
+17,9:61
+26:70,3
+27,4:73
+31,4:78
+34,7:82
+41,4:90
+44,4:94
+48:98,3
+49,25:101
+74:126,3
+75,5:129
+*E

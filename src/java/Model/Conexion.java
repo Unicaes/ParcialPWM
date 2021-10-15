@@ -40,6 +40,15 @@ public class Conexion {
         Statement cons = this.conexion.createStatement();
         return cons.executeQuery(query);
     }
+    public int DoQuery2(String query) throws SQLException{
+        try{
+        Statement cons = this.conexion.createStatement();
+        cons.executeUpdate(query);
+        return 1;
+        } catch (Exception e) {
+            return -5;
+        }
+    }
 
     public ResultSet consultar(String campos, String tabla, String condicion) throws SQLException {
         String sql = "SELECT " + campos + " FROM " + tabla + " where " + condicion;

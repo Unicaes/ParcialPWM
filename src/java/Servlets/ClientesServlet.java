@@ -56,7 +56,19 @@ public class ClientesServlet extends HttpServlet {
                 response.sendRedirect("Views/Clientes/CRUDClientes.jsp");
                 break;
             case 3:
-                System.out.println("Editar");
+                response.sendRedirect("Views/Clientes/ModifyCliente.jsp?id="+id);
+                break;
+            case 5:
+                Clientes item2 = new Clientes();
+                item2.nombres=request.getParameter("txtNombres");
+                item2.apellidos=request.getParameter("txtApellidos");
+                item2.telefono=request.getParameter("txtTelefono");
+                item2.clave=request.getParameter("txtClave");
+                item2.direccion=request.getParameter("txtDireccion");
+                item2.correo=request.getParameter("txtMail");
+                item2.sexo=request.getParameter("txtSexo");
+                Clientes.update(item2);
+                response.sendRedirect("Views/Clientes/CRUDClientes.jsp");
                 break;
         }
     }

@@ -5,6 +5,7 @@
  */
 package Model;
 
+import static Model.Producto.oCon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,5 +45,26 @@ public class Clientes {
     public static int RemoveCliente(int id)throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException{
         ocon = new Conexion();
         return ocon.eliminar("clientes", "idcliente="+id);
+    }
+    public static Clientes GetById(int id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        oCon = new Conexion();
+        ResultSet rs = oCon.consultar("*", "clientes", "idcliente=" + id);
+        Clientes item = new Clientes();
+        while (rs.next()) {
+            item.idcliente=rs.getInt(1);
+            item.nombres=rs.getString(2);
+            item.apellidos=rs.getString(3);
+            item.sexo=rs.getString(4);
+            item.telefono=rs.getString(5);
+            item.pais=rs.getString(6);
+            item.correo=rs.getString(8);
+            item.direccion=rs.getString(9);
+        }
+        return item;
+    }
+    public static void update(Clientes item) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        oCon = new Conexion();
+        String query = "update clientes set nombres='"+item.nombres+"',apellidos='"+item.apellidos+"',sexo='"+item.sexo+"',telefono='"+item.telefono+"',pais='"+item.pais+"',clave='"+item.clave+"',correo='"+item.correo+"',direccion='"+item.direccion+"';";
+        oCon.DoQuery2(query);
     }
 }

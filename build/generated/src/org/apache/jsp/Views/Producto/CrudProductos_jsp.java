@@ -3,6 +3,7 @@ package org.apache.jsp.Views.Producto;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import Model.Producto;
 import Model.Categoria;
 import Model.Proveedores;
 import java.util.ArrayList;
@@ -50,9 +51,11 @@ public final class CrudProductos_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
 
     ArrayList<Proveedores> proveedores = Proveedores.GetAll();
     ArrayList<Categoria> categorias = Categoria.GetAll();
+    ArrayList<Producto> productos = Producto.GetAll();
 
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -88,30 +91,30 @@ public final class CrudProductos_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("            </div>\n");
       out.write("        </nav>\n");
       out.write("        <div class=\"container\">\n");
-      out.write("            <h1>Clientes</h1>\n");
+      out.write("            <h1>Productos</h1>\n");
       out.write("            <form action=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("/CRUDProductos\" enctype=\"multipart/form-data\" method=\"POST\">\n");
       out.write("                <div class=\"mb-3\">\n");
-      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Nombre del producto</label>\n");
-      out.write("                    <select name=\"txtCategoria\">\n");
+      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Categoria</label>\n");
+      out.write("                    <select class=\"form-select\" name=\"txtCategoria\">\n");
       out.write("                        ");
 
                             for (int i = 0; i < categorias.size(); i++) {
-                                    out.println("<option value=\""+categorias.get(i).idcategoria+"\">"+categorias.get(i).nombre_categoria+"</option>");
-                                }
+                                out.println("<option value=\"" + categorias.get(i).idcategoria + "\">" + categorias.get(i).nombre_categoria + "</option>");
+                            }
                         
       out.write("\n");
       out.write("                    </select>\n");
       out.write("                </div>\n");
       out.write("                <div class=\"mb-3\">\n");
-      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Nombre del producto</label>\n");
-      out.write("                    <select name=\"txtCategoria\">\n");
+      out.write("                    <label for=\"exampleInputEmail1\" class=\"form-label\">Proveedor</label>\n");
+      out.write("                    <select class=\"form-select\" name=\"txtProveedor\">\n");
       out.write("                        ");
 
                             for (int i = 0; i < proveedores.size(); i++) {
-                                    out.println("<option value=\""+proveedores.get(i).idproveedor+"\">"+proveedores.get(i).nombre_proveedor+"</option>");
-                                }
+                                out.println("<option value=\"" + proveedores.get(i).idproveedor + "\">" + proveedores.get(i).nombre_proveedor + "</option>");
+                            }
                         
       out.write("\n");
       out.write("                    </select></div>\n");
@@ -151,16 +154,33 @@ public final class CrudProductos_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                <table class=\"table\">\n");
       out.write("                    <thead>\n");
       out.write("                        <tr>\n");
-      out.write("                            <th>Nombres</th>\n");
-      out.write("                            <th>Apellidos</th>\n");
-      out.write("                            <th>Direccion</th>\n");
-      out.write("                            <th>Telefono</th>\n");
-      out.write("                            <th>Sexo</th>\n");
-      out.write("                            <th>Correo</th>\n");
+      out.write("                            <th>Nombre Producto</th>\n");
+      out.write("                            <th>Precio Normal</th>\n");
+      out.write("                            <th>Ofertado</th>\n");
+      out.write("                            <th>Existencias</th>\n");
+      out.write("                            <th>Descripcion</th>\n");
+      out.write("                            <th></th>\n");
+      out.write("                            <th></th>\n");
       out.write("                        </tr>\n");
       out.write("                    </thead>\n");
       out.write("                    <tbody>\n");
-      out.write("                        \n");
+      out.write("                        ");
+
+                            for (int i = 0; i < productos.size(); i++) {
+                                out.println("<tr>");
+                                out.println("<td>" + productos.get(i).nombre_producto + "</td>");
+                                out.println("<td>" + productos.get(i).precio_normal + "</td>");
+                                out.println("<td>" + productos.get(i).ofertado + "</td>");
+                                out.println("<td>" + productos.get(i).precio_oferta + "</td>");
+                                out.println("<td>" + productos.get(i).descripcion + "</td>");
+                                out.println("<td>");
+                                out.println("<button type=\"submit\" name=\"btnAction\" value=\"2-" + productos.get(i).idproducto + "\" class=\"btn btn-danger\">Eliminar</button>");
+                                out.println("<button type=\"submit\" name=\"btnAction\" value=\"3-" + productos.get(i).idproducto + "\" class=\"btn btn-info\">Editar</button>");
+                                out.println("</td>");
+                                out.println("</tr>");
+                            }
+                        
+      out.write("\n");
       out.write("                    </tbody>\n");
       out.write("                </table>\n");
       out.write("            </form>\n");
