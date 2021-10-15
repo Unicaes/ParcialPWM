@@ -35,7 +35,13 @@
                             <a href="/Parcial/Views/Clientes/CRUDClientes.jsp" class="nav-link" href="#">Clientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Productos</a>
+                            <a href="/Parcial/Views/Producto/CrudProductos.jsp" class="nav-link">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Parcial/Views/Categoria/CRUDCategoria.jsp" class="nav-link">Categoria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Parcial/Views/Proveedor/CRUDProveedor.jsp" class="nav-link">Proveedores</a>
                         </li>
                         <li class="nav-item">
                             <a href="/Parcial/Views/Carrito/ListCarrito.jsp" class="nav-link btn btn-primary text-white">Carrito</a>
@@ -86,7 +92,7 @@
                     </tbody>
                 </table>
                         <h3>Subtotal: <% out.println(subtotal); %></h3>
-                        <button class="btn btn-success" type="submit" name="btnAction" value="4">Pagar</button>
+                        <button class="btn btn-success" type="submit" name="btnAction" value="4-0">Pagar</button>
             </form>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

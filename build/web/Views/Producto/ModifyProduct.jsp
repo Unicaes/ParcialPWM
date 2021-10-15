@@ -41,6 +41,12 @@
                             <a href="/Parcial/Views/Producto/CrudProductos.jsp" class="nav-link">Productos</a>
                         </li>
                         <li class="nav-item">
+                            <a href="/Parcial/Views/Categoria/CRUDCategoria.jsp" class="nav-link">Categoria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Parcial/Views/Proveedor/CRUDProveedor.jsp" class="nav-link">Proveedores</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/Parcial/Views/Carrito/ListCarrito.jsp" class="nav-link btn btn-primary text-white">Carrito</a>
                         </li>
                     </ul>

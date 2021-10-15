@@ -40,6 +40,12 @@
                             <a href="/Parcial/Views/Producto/CrudProductos.jsp" class="nav-link">Productos</a>
                         </li>
                         <li class="nav-item">
+                            <a href="/Parcial/Views/Categoria/CRUDCategoria.jsp" class="nav-link">Categoria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Parcial/Views/Proveedor/CRUDProveedor.jsp" class="nav-link">Proveedores</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/Parcial/Views/Carrito/ListCarrito.jsp" class="nav-link btn btn-primary text-white">Carrito</a>
                         </li>
                     </ul>
@@ -107,6 +113,7 @@
                             <th>Ofertado</th>
                             <th>Existencias</th>
                             <th>Descripcion</th>
+                            <th>Categoria</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -120,6 +127,7 @@
                                 out.println("<td>" + productos.get(i).ofertado + "</td>");
                                 out.println("<td>" + productos.get(i).precio_oferta + "</td>");
                                 out.println("<td>" + productos.get(i).descripcion + "</td>");
+                                out.println("<td>" + productos.get(i).categoria + "</td>");
                                 out.println("<td>");
                                 out.println("<button type=\"submit\" name=\"btnAction\" value=\"2-" + productos.get(i).idproducto + "\" class=\"btn btn-danger\">Eliminar</button>");
                                 out.println("<button type=\"submit\" name=\"btnAction\" value=\"3-" + productos.get(i).idproducto + "\" class=\"btn btn-info\">Editar</button>");

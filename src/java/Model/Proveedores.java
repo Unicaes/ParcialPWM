@@ -31,4 +31,9 @@ public class Proveedores {
         }
         return proveedores;
     }
+    public static int Agregar(Proveedores item) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        oConn = new Conexion();
+        oConn.agregar("insert into proveedores(nombre_proveedor,telefono,contacto) values('"+item.nombre_proveedor+"','"+item.telefono+"','"+item.contacto+"');");
+        return 1;
+    }
 }

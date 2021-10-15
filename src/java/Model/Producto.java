@@ -16,14 +16,14 @@ import java.util.ArrayList;
 public class Producto {
 
     public int idproducto, idcategoria, idproveedor, ofertado, existencias, cantCarrito;
-    public String nombre_producto, imagen, descripcion;
+    public String nombre_producto, imagen, descripcion,categoria;
     public double precio_normal, precio_oferta;
     static Conexion oCon;
 
     public static ArrayList<Producto> GetAll() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         oCon = new Conexion();
         ArrayList<Producto> productos = new ArrayList<>();
-        ResultSet rs = oCon.consultar("*", "productos");
+        ResultSet rs = oCon.consultar("idproducto,productos.idcategoria,idproveedor,nombre_producto,precio_normal,ofertado,precio_oferta,existencias,descripcion,imagen,categorias.nombre_categoria", "productos inner join categorias on categorias.idcategoria=productos.idcategoria");
         while (rs.next()) {
             Producto item = new Producto();
             item.idproducto = rs.getInt(1);
@@ -36,6 +36,7 @@ public class Producto {
             item.existencias = rs.getInt(8);
             item.descripcion = rs.getString(9);
             item.imagen = rs.getString(10);
+            item.categoria = rs.getString(11);
             productos.add(item);
         }
         return productos;
@@ -43,7 +44,7 @@ public class Producto {
 
     public static Producto GetById(int id) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         oCon = new Conexion();
-        ResultSet rs = oCon.consultar("*", "productos", "idproducto=" + id);
+        ResultSet rs = oCon.consultar("idproducto,productos.idcategoria,idproveedor,nombre_producto,precio_normal,ofertado,precio_oferta,existencias,descripcion,imagen,categorias.nombre_categoria", "productos inner join categorias on categorias.idcategoria=productos.idcategoria", "idproducto=" + id);
         Producto item = new Producto();
         while (rs.next()) {
             item.idproducto = rs.getInt(1);
@@ -56,6 +57,7 @@ public class Producto {
             item.existencias = rs.getInt(8);
             item.descripcion = rs.getString(9);
             item.imagen = rs.getString(10);
+            item.categoria = rs.getString(11);
         }
         return item;
     }

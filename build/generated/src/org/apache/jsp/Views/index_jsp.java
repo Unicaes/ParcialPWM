@@ -78,6 +78,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <a href=\"/Parcial/Views/Producto/CrudProductos.jsp\" class=\"nav-link\">Productos</a>\n");
       out.write("                        </li>\n");
       out.write("                        <li class=\"nav-item\">\n");
+      out.write("                            <a href=\"/Parcial/Views/Categoria/CRUDCategoria.jsp\" class=\"nav-link\">Categoria</a>\n");
+      out.write("                        </li>\n");
+      out.write("                        <li class=\"nav-item\">\n");
+      out.write("                            <a href=\"/Parcial/Views/Proveedor/CRUDProveedor.jsp\" class=\"nav-link\">Proveedores</a>\n");
+      out.write("                        </li>\n");
+      out.write("                        <li class=\"nav-item\">\n");
       out.write("                            <a href=\"/Parcial/Views/Carrito/ListCarrito.jsp\" class=\"nav-link btn btn-primary text-white\">Carrito</a>\n");
       out.write("                        </li>\n");
       out.write("                    </ul>\n");
@@ -100,6 +106,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
                             out.println("<h5 class=\"card-title\">" + productos.get(i).nombre_producto + "</h5>");
                             out.println("<p class=\"card-text\">" + productos.get(i).descripcion + "</p>");
                             out.println("<p class=\"card-text\">$" + productos.get(i).precio_normal + "</p>");
+                            out.println("<p class=\"card-text\">" + productos.get(i).categoria + "</p>");
                             out.println("<button href=\"#\" type=submit name=\"btnProducto\" value=\"" + productos.get(i).idproducto + "\" class=\"btn btn-primary\">Agregar al carrito</button>");
                             out.println("</div>");
                             out.println("</div>");

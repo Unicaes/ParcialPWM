@@ -41,17 +41,18 @@ public class CarritoServlet extends HttpServlet {
         switch (Action) {
             case 1:
                 clsCarrito.AddElement(item);
+                response.sendRedirect("/Parcial/Views/Carrito/ListCarrito.jsp");
                 break;
             case 2:
                 clsCarrito.RemoveElement(item);
+                response.sendRedirect("/Parcial/Views/Carrito/ListCarrito.jsp");
                 break;
             case 4:
-                
+                response.sendRedirect("/Parcial/Views/Login.jsp");
                 break;
             default:
                 throw new AssertionError();
         }
-        response.sendRedirect("/Parcial/Views/Carrito/ListCarrito.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

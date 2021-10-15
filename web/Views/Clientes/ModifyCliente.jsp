@@ -33,7 +33,13 @@ Clientes item = Clientes.GetById(id);
                             <a href="/Parcial/Views/Clientes/CRUDClientes.jsp" class="nav-link" href="#">Clientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Productos</a>
+                            <a href="/Parcial/Views/Producto/CrudProductos.jsp" class="nav-link">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Parcial/Views/Categoria/CRUDCategoria.jsp" class="nav-link">Categoria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Parcial/Views/Proveedor/CRUDProveedor.jsp" class="nav-link">Proveedores</a>
                         </li>
                         <li class="nav-item">
                             <a href="/Parcial/Views/Carrito/ListCarrito.jsp" class="nav-link btn btn-primary text-white">Carrito</a>
@@ -63,7 +69,10 @@ Clientes item = Clientes.GetById(id);
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Sexo</label>
-                    <input type="text" value=<% out.println(item.sexo); %> name="txtSexo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <select class="form-select" name="txtSexo">
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Clave</label>

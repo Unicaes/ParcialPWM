@@ -1,0 +1,14 @@
+SMAP
+CRUDProveedor_jsp.java
+JSP
+*S JSP
+*F
++ 0 CRUDProveedor.jsp
+Views/Proveedor/CRUDProveedor.jsp
+*L
+1,6:48
+7:54,2
+8,37:56
+45:93,3
+46,20:96
+*E

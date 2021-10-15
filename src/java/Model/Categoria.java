@@ -29,4 +29,9 @@ public class Categoria {
         }
         return categorias;
     }
+    public static int Add(Categoria item) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        oCon = new Conexion();
+        oCon.agregar("insert into categorias(nombre_categoria) values('"+item.nombre_categoria+"');");
+        return 1;
+    }
 }

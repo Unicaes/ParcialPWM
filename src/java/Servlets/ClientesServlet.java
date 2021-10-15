@@ -6,10 +6,17 @@
 package Servlets;
 
 import Model.Clientes;
+import Model.EncriptadorAES;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,11 +40,12 @@ public class ClientesServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         response.setContentType("text/html;charset=UTF-8");
         String[] para = request.getParameter("btnAction").split("-");
         int action = Integer.parseInt(para[0]);        
         int id = Integer.parseInt(para[1]);
+        EncriptadorAES crypt = new EncriptadorAES();
         switch (action) {
             case 1:
                 Clientes item = new Clientes();
@@ -48,6 +56,7 @@ public class ClientesServlet extends HttpServlet {
                 item.direccion=request.getParameter("txtDireccion");
                 item.correo=request.getParameter("txtMail");
                 item.sexo=request.getParameter("txtSexo");
+                item.clave= crypt.encriptar(item.clave, "HolaMundo");
                 Clientes.AddCliente(item);
                 response.sendRedirect("Views/Clientes/CRUDClientes.jsp");
                 break;
@@ -60,6 +69,7 @@ public class ClientesServlet extends HttpServlet {
                 break;
             case 5:
                 Clientes item2 = new Clientes();
+                item2.idcliente=id;
                 item2.nombres=request.getParameter("txtNombres");
                 item2.apellidos=request.getParameter("txtApellidos");
                 item2.telefono=request.getParameter("txtTelefono");
@@ -67,6 +77,7 @@ public class ClientesServlet extends HttpServlet {
                 item2.direccion=request.getParameter("txtDireccion");
                 item2.correo=request.getParameter("txtMail");
                 item2.sexo=request.getParameter("txtSexo");
+                item2.clave= crypt.encriptar(item2.clave, "HolaMundo");
                 Clientes.update(item2);
                 response.sendRedirect("Views/Clientes/CRUDClientes.jsp");
                 break;
@@ -84,7 +95,7 @@ public class ClientesServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, UnsupportedEncodingException {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
@@ -94,6 +105,16 @@ public class ClientesServlet extends HttpServlet {
         } catch (InstantiationException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -118,6 +139,18 @@ public class ClientesServlet extends HttpServlet {
         } catch (InstantiationException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
             Logger.getLogger(ClientesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
