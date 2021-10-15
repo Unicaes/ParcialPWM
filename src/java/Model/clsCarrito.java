@@ -27,19 +27,23 @@ public class clsCarrito {
         clsCarrito.GetInstance();
         if (clsCarrito.GetInstance().carrito.containsKey(item.idproducto)) {
             item = clsCarrito.GetInstance().carrito.get(item.idproducto);
-            item.existencias++;
+            if (item.cantCarrito+1>item.existencias) {
+                return;
+            }
+            item.cantCarrito++;
             clsCarrito.GetInstance().carrito.put(item.idproducto, item);
             return;
         }
+        item.cantCarrito=1;
         clsCarrito.GetInstance().carrito.put(item.idproducto, item);
     }
     public static void RemoveElement(Producto item){
         clsCarrito.GetInstance();
         if (clsCarrito.GetInstance().carrito.containsKey(item.idproducto)) {
             item = clsCarrito.GetInstance().carrito.get(item.idproducto);
-            item.existencias--;
+            item.cantCarrito--;
             clsCarrito.GetInstance().carrito.put(item.idproducto, item);
-            if (clsCarrito.GetInstance().carrito.get(item.idproducto).existencias<=0) {
+            if (clsCarrito.GetInstance().carrito.get(item.idproducto).cantCarrito<=0) {
                 clsCarrito.GetInstance().carrito.remove(item.idproducto);
             }
         }

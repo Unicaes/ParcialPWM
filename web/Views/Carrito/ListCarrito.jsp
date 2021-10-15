@@ -10,6 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Map<Integer, Producto> productos = clsCarrito.GetInstance().carrito;
+    double subtotal=0;
 %>
 <!DOCTYPE html>
 <html>
@@ -69,7 +70,7 @@
                                     out.println(entry.getValue().precio_normal);
                                     out.println("</td>");
                                     out.println("<td>");
-                                    out.println(entry.getValue().existencias);
+                                    out.println(entry.getValue().cantCarrito);
                                     out.println("</td>");
                                     out.println("<td>");
                                     out.println("<button type=\"submit\" name=\"btnAction\" value=\"2-" + entry.getKey() + "\">-</button>");
@@ -78,13 +79,15 @@
                                     out.println("<button type=\"submit\" name=\"btnAction\" value=\"1-" + entry.getKey() + "\">+</button>");
                                     out.println("</td>");
                                     out.println("</tr>");
+                                    subtotal+=(entry.getValue().existencias*entry.getValue().precio_normal);
                                 }
                             }
                         %>
                     </tbody>
                 </table>
+                        <h3>Subtotal: <% out.println(subtotal); %></h3>
+                        <button class="btn btn-success" type="submit" name="btnAction" value="4">Pagar</button>
             </form>
-
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>

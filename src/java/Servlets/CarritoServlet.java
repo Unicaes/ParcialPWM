@@ -45,6 +45,9 @@ public class CarritoServlet extends HttpServlet {
             case 2:
                 clsCarrito.RemoveElement(item);
                 break;
+            case 4:
+                
+                break;
             default:
                 throw new AssertionError();
         }

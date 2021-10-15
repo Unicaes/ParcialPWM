@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author bryan
  */
 public class Producto {
-    public int idproducto,idcategoria,idproveedor,ofertado,existencias;
+    public int idproducto,idcategoria,idproveedor,ofertado,existencias,cantCarrito;
     public String nombre_producto,imagen,descripcion;
     public double precio_normal,precio_oferta;
     static Conexion oCon;

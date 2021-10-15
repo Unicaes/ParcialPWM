@@ -39,7 +39,6 @@ public class ProductoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("btnProducto"));
         Producto item = Producto.GetById(id);
-        item.existencias=1;
         clsCarrito.AddElement(item);
         response.sendRedirect("Views/index.jsp");
     }
