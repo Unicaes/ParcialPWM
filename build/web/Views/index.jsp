@@ -20,20 +20,23 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"> Bryan Palma</a>
+                <a class="navbar-brand" href="#"> JSP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a href="/Parcial/Views/index.jsp" class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Clientes</a>
+                            <a href="/Parcial/Views/Clientes/CRUDClientes.jsp" class="nav-link" href="#">Clientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled">Productos</a>
+                            <a href="/Parcial/Views/Producto/CrudProductos.jsp" class="nav-link">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Parcial/Views/Carrito/ListCarrito.jsp" class="nav-link btn btn-primary text-white">Carrito</a>
                         </li>
                     </ul>
                 </div>
@@ -47,7 +50,7 @@
                         for (int i = 0; i < productos.size(); i++) {
                             out.println("<div class=\"col-4 pb-5\">");
                             out.println("<div class=\"card\" style=\"width: 18rem;\">");
-                            out.println("<img src=\"https://image.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg\" class=\"card-img-top\" alt=\"...\">");
+                            out.println("<img src=\"data:image/png;base64,"+productos.get(i).imagen+"\" class=\"card-img-top\" alt=\"...\">");
                             out.println("<div class=\"card-body\">");
                             out.println("<h5 class=\"card-title\">" + productos.get(i).nombre_producto + "</h5>");
                             out.println("<p class=\"card-text\">" + productos.get(i).descripcion + "</p>");

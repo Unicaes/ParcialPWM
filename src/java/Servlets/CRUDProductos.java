@@ -6,24 +6,27 @@
 package Servlets;
 
 import Model.Producto;
-import Model.clsCarrito;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
  *
  * @author bryan
  */
-@WebServlet(name = "ProductoServlet", urlPatterns = {"/ProductoServlet"})
-public class ProductoServlet extends HttpServlet {
+@WebServlet(name = "CRUDProductos", urlPatterns = {"/CRUDProductos"})
+@MultipartConfig(fileSizeThreshold = 1024*1024*2,maxFileSize=1024*1024*10,maxRequestSize=1024*1024*50)
+public class CRUDProductos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,11 +40,24 @@ public class ProductoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("btnProducto"));
-        Producto item = Producto.GetById(id);
-        item.existencias=1;
-        clsCarrito.AddElement(item);
-        response.sendRedirect("Views/index.jsp");
+        Part fileImage = request.getPart("file");
+        String name = fileImage.getName();
+        InputStream fileContent = fileImage.getInputStream();
+        byte[] imageBytes = new byte[(int) fileImage.getSize()];
+        fileContent.read(imageBytes, 0, imageBytes.length);
+        fileContent.close();
+        String imageStr = Base64.encodeBase64String(imageBytes);
+        Producto item = new Producto();
+        item.imagen=imageStr;
+        item.descripcion=request.getParameter("txtDescripcion");
+        item.nombre_producto=request.getParameter("txtNombreProd");
+        item.precio_normal=Double.parseDouble(request.getParameter("txtPrecioN"));
+        item.ofertado=Integer.parseInt(request.getParameter("txtOfertado"));
+        item.precio_oferta=Double.parseDouble(request.getParameter("txtPrecioO"));
+        item.existencias=Integer.parseInt(request.getParameter("txtExistencias"));
+        Producto.Insert(item);
+        response.sendRedirect("/Views/index.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,13 +75,13 @@ public class ProductoServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDProductos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDProductos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDProductos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,13 +99,13 @@ public class ProductoServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDProductos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDProductos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDProductos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CRUDProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,12 +1,10 @@
-package org.apache.jsp.Views;
+package org.apache.jsp.Views.Producto;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import Model.Producto;
-import java.util.ArrayList;
 
-public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class CrudProductos_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -46,12 +44,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
-
-    ArrayList<Producto> productos = Producto.GetAll();
-
-      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -84,32 +76,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </nav>\n");
-      out.write("        <div class=\"container p-3\">\n");
-      out.write("            <h1>Productos</h1>\n");
-      out.write("            <form method=\"POST\" action=\"");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("/ProductoServlet\">\n");
-      out.write("                <div class=\"row\">\n");
-      out.write("                    ");
-
-                        for (int i = 0; i < productos.size(); i++) {
-                            out.println("<div class=\"col-4 pb-5\">");
-                            out.println("<div class=\"card\" style=\"width: 18rem;\">");
-                            out.println("<img src=\"data:image/png;base64,"+productos.get(i).imagen+"\" class=\"card-img-top\" alt=\"...\">");
-                            out.println("<div class=\"card-body\">");
-                            out.println("<h5 class=\"card-title\">" + productos.get(i).nombre_producto + "</h5>");
-                            out.println("<p class=\"card-text\">" + productos.get(i).descripcion + "</p>");
-                            out.println("<p class=\"card-text\">$" + productos.get(i).precio_normal + "</p>");
-                            out.println("<button href=\"#\" type=submit name=\"btnProducto\" value=\"" + productos.get(i).idproducto + "\" class=\"btn btn-primary\">Agregar al carrito</button>");
-                            out.println("</div>");
-                            out.println("</div>");
-                            out.println("</div>");
-                        }
-                    
-      out.write("\n");
-      out.write("                </div>\n");
-      out.write("            </form>\n");
-      out.write("                <input type=\"hidden\" value=\"\"/>\n");
+      out.write("        <div class=\"container\">\n");
+      out.write("            \n");
       out.write("        </div>\n");
       out.write("        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p\" crossorigin=\"anonymous\"></script>\n");
       out.write("    </body>\n");

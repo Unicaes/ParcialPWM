@@ -56,4 +56,10 @@ public class Producto {
         }
         return item;
     }
+    public static int Insert(Producto item) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+        oCon = new Conexion();
+        int resp = oCon.agregar("Insert into productos(idcategoria,idproveedor ,nombre_producto,precio_normal,ofertado,precio_oferta,existencias,descripcion,imagen)"
+                + "values('"+item.idcategoria+"','"+item.idproveedor+"','"+item.nombre_producto+"','"+item.precio_normal+"','"+item.ofertado+"','"+item.precio_oferta+"','"+item.existencias+"','"+item.descripcion+"','"+item.imagen+"')");
+        return resp;
+    }
 }

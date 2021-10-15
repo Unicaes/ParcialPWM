@@ -12,4 +12,7 @@ package Model;
 public class Proveedores {
     int idproveedor;
     String nombre_proveedor,telefono,contacto;
+    public static Proveedores GetAll(){
+        
+    }
 }
